@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -y \
     ripgrep \
     htop \
     fd-find \
+    build-essential \
     # Programming tools
     neovim \
     tmux \
