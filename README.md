@@ -1,6 +1,8 @@
 # AwesomeWM
 My dotfiles for Linux and some tools.
 
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/af5e3edd-4186-4973-95a6-185bd2831e7f" />
+
 ## 1. Installation
 
 ### 1.1. Packages
@@ -8,12 +10,12 @@ My dotfiles for Linux and some tools.
 #### Debian
 ```bash
 sudo apt update
-sudo apt install rofi picom awesome firefox-esr git nodejs npm alacritty tmux zsh curl ksnip
+sudo apt install rofi picom awesome firefox-esr git nodejs npm alacritty tmux zsh curl ksnip nemo
 ```
 
 #### Arch
 ```bash
-sudo pacman -Syu rofi picom awesome firefox git nodejs npm alacritty tmux zsh curl ksnip
+sudo pacman -Syu rofi picom awesome firefox git nodejs npm alacritty tmux zsh curl ksnip nemo
 ```
 
 ### 1.2. Oh-my-zsh
@@ -73,4 +75,26 @@ chmod +x
 
 source ~/.zshrc
 ```
+## 2. Shortcuts
+`win + t` Open alacritty
 
+`win + f` Open firefox
+
+`win + e` Open nemo
+
+`win + r` Open rofi
+
+`win + q` Close current window
+
+`win + shift + 1-9` Move current window to another workspace
+
+`win + 1-9` Go to another workspace
+
+`win + shift + s` Make a screenshoot
+
+`win + left/right/up/down` Focus left/right/up/down window
+
+`win + shift + left/right/up/down` Move window within desktop
+
+## 3. TODO's
+- [ ] Fix the appearance of wibar
