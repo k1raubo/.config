@@ -416,6 +416,40 @@ local function set_wallpaper(s)
     end
 end
 
+local function focus_or_screen(dir)
+    return function()
+        local c = client.focus
+        if c then
+            awful.client.focus.bydirection(dir)
+            if client.focus == c then
+                awful.screen.focus_bydirection(dir)
+            end
+        else
+            awful.screen.focus_bydirection(dir)
+        end
+    end
+end
+
+local function move_or_screen(dir)
+    return function()
+        local c = client.focus
+        if not c then return end
+
+        local before_tags = c.first_tag
+
+        awful.client.swap.bydirection(dir)
+
+        if c.first_tag == before_tags then
+            local target_screen = c.screen:get_next_in_direction(dir)
+            if target_screen then
+                c:move_to_screen(target_screen)
+                c:raise()
+                client.focus = c
+            end
+        end
+    end
+end
+
 screen.connect_signal("property::geometry", set_wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
@@ -658,24 +692,23 @@ globalkeys = gears.table.join(
         {description = "brightness down", group = "brightness"}),
 
     -- Focus windows with Win + Arrow keys
-    awful.key({ modkey }, "Left",
-        function() awful.client.focus.bydirection("left") end,
-        { description = "focus left", group = "client" }),
+    awful.key({ modkey }, "Left",  focus_or_screen("left"),
+        { description = "focus left / screen", group = "client" }),
+    awful.key({ modkey }, "Right", focus_or_screen("right"),
+        { description = "focus right / screen", group = "client" }),
+    awful.key({ modkey }, "Up",    focus_or_screen("up"),
+        { description = "focus up / screen", group = "client" }),
+    awful.key({ modkey }, "Down",  focus_or_screen("down"),
+        { description = "focus down / screen", group = "client" }),
 
-    awful.key({ modkey }, "Right",
-        function() awful.client.focus.bydirection("right") end,
-        { description = "focus right", group = "client" }),
-
-    awful.key({ modkey }, "Up",
-        function() awful.client.focus.bydirection("up") end,
-        { description = "focus up", group = "client" }),
-
-    awful.key({ modkey }, "Down",
-        function() awful.client.focus.bydirection("down") end,
-        { description = "focus down", group = "client" })
-
-
-
+    awful.key({ modkey, "Shift" }, "Left",  move_or_screen("left"),
+        { description = "move window left / to left screen", group = "client" }),
+    awful.key({ modkey, "Shift" }, "Right", move_or_screen("right"),
+        { description = "move window right / to right screen", group = "client" }),
+    awful.key({ modkey, "Shift" }, "Up",    move_or_screen("up"),
+        { description = "move window up / to top screen", group = "client" }),
+    awful.key({ modkey, "Shift" }, "Down",  move_or_screen("down"),
+        { description = "move window down / to bottom screen", group = "client" })
 )
 
 root.keys(globalkeys)
