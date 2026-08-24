@@ -1,3 +1,6 @@
+[terminal.shell]
+program = "/usr/bin/zsh"
+
 [colors.primary]
 background = "#161616"    # neutralny, prawie czarny - jak na screenie
 foreground = "#cdd6f4"
