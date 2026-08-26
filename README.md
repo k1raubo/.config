@@ -98,3 +98,5 @@ source ~/.zshrc
 
 ## 3. TODO's
 - [ ] Fix the appearance of wibar
+- [ ] Focus window on mouse hover
+- [ ] Fix moving windows within multi-desktop environment
